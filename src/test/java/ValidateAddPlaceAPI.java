@@ -1,6 +1,6 @@
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.*;
-
+import static org.hamcrest.Matchers.*;
 public class ValidateAddPlaceAPI {
     public static void main(String[] args) {
         // first example - validate if "Add Place API" ia working properly - POST req.
@@ -16,25 +16,23 @@ public class ValidateAddPlaceAPI {
         // following line , we describe our key ( from url ) and its value ( refer to postman)
         //.log().all() shows givin data as well as output perfectly. this is a must
         given().log().all().queryParam("key","qaclick123").header("Content-Type","application/json")
-                .body("{\r\n" +
-                        "  \"location\":{\r\n" +
-                        "    \"lat\":-38.383494,\r\n" +
-                        "    \"lng\":33.427362\r\n" +
-                        "  },\r\n" +
-                        "  \"accuracy\":50,\r\n" +
-                        "  \"name\":\"Ali Kiyancicek\",\r\n" +
-                        "  \"phone_number\": \"(+1) 983 9797 34 34\",\r\n" +
-                        "  \"address\": \" Toronto\",\r\n" +
-                        "  \"types\":[\r\n" +
-                        "    \"shoe park\",\r\n" +
-                        "    \"shop\"\r\n" +
-                        "  ],\r\n" +
-                        "  \"website\": \"http://rahulshettyacademy.com\",\r\n" +
-                        "  \"language\":\"French-IN\"\r\n" +
-                        "}\r\n" +
-                        "").
+                // calling clas-> then the static method which has our json data
+                .body(jsonData.jsonData()).
                 when().post("maps/api/place/add/json")
-                .then().log().all().assertThat().statusCode(200);
+                .then().log().all().assertThat().statusCode(200)
+                //validating if scope=APP with body and equal to method. also equal to method is under the static package called harmcast.matchers.
+                // we need to import it manually
+                .body("scope",equalTo("APP"))
+                // all methods after written THEN will be return or output.
+                // following line checks the server is validated as ours or not. because we might hacked.
+                //this is most commonly used technic
+                .header("server","Apache/2.4.41 (Ubuntu)");
+
+                // Add place - > Update place with new address -> get place to validate if new address presents in the response.
+                // ( end to end automation test sample)
+                // first need to tell which place going to change based on place_id
+
+
     }
 
 }

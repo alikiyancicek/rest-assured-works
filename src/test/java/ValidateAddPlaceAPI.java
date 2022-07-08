@@ -16,7 +16,8 @@ public class ValidateAddPlaceAPI {
         //given
         // given belong to rest assured static package so we need to import that static package. ln 2
         // following line , we describe our key ( from url ) and its value ( refer to postman)
-        given().queryParam("key","qaclick123").header("Content-Type","application/json")
+        //.log().all() shows givin data as well as output perfectly. this is a must
+        given().log().all().queryParam("key","qaclick123").header("Content-Type","application/json")
                 .body("{\r\n" +
                         "  \"location\":{\r\n" +
                         "    \"lat\":-38.383494,\r\n" +
@@ -35,9 +36,7 @@ public class ValidateAddPlaceAPI {
                         "}\r\n" +
                         "").
                 when().post("maps/api/place/add/json")
-                .then().assertThat().statusCode(200);
-
-
+                .then().log().all().assertThat().statusCode(200);
 
     }
 

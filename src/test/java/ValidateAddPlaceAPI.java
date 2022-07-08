@@ -17,7 +17,7 @@ public class ValidateAddPlaceAPI {
         //.log().all() shows givin data as well as output perfectly. this is a must
         given().log().all().queryParam("key","qaclick123").header("Content-Type","application/json")
                 // calling clas-> then the static method which has our json data
-                .body(jsonData.jsonData()).
+                .body(jsonData.jsonDatas()).
                 when().post("maps/api/place/add/json")
                 .then().log().all().assertThat().statusCode(200)
                 //validating if scope=APP with body and equal to method. also equal to method is under the static package called harmcast.matchers.

@@ -1,6 +1,6 @@
 public class jsonData {
 
-    public static String jsonData(){
+    public static String jsonDatas(){
 
         return "{\r\n" +
                 "  \"location\":{\r\n" +

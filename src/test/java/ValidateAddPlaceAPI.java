@@ -32,7 +32,6 @@ public class ValidateAddPlaceAPI {
                 // ( end to end automation test sample)
                 // first need to tell which place going to change based on place_id
 
-
     }
 
 }

@@ -3,17 +3,15 @@ import static io.restassured.RestAssured.*;
 
 public class ValidateAddPlaceAPI {
     public static void main(String[] args) {
-        // first example - validate if "Add Place API" ia working properly
+        // first example - validate if "Add Place API" ia working properly - POST req.
 
         //given, when, there methods in the automation tests in rest assured
-
-        //given - all input details
-        //when - submit the API -  resources and http methods
-        //then - validate the response
-        // initialize the baseURI
+        //1- given - all input details
+        //2- when - submit the API -  resources and http methods
+        //3- then - validate the response
+        //initialize the baseURI
         RestAssured.baseURI = "https://rahulshettyacademy.com";
 
-        //given
         // given belong to rest assured static package so we need to import that static package. ln 2
         // following line , we describe our key ( from url ) and its value ( refer to postman)
         //.log().all() shows givin data as well as output perfectly. this is a must
@@ -24,9 +22,9 @@ public class ValidateAddPlaceAPI {
                         "    \"lng\":33.427362\r\n" +
                         "  },\r\n" +
                         "  \"accuracy\":50,\r\n" +
-                        "  \"name\":\"Rahul Shetty Academy\",\r\n" +
-                        "  \"phone_number\": \"(+49) 983 9797 34 34\",\r\n" +
-                        "  \"address\": \" 29, side layout, cohen 90\",\r\n" +
+                        "  \"name\":\"Ali Kiyancicek\",\r\n" +
+                        "  \"phone_number\": \"(+1) 983 9797 34 34\",\r\n" +
+                        "  \"address\": \" Toronto\",\r\n" +
                         "  \"types\":[\r\n" +
                         "    \"shoe park\",\r\n" +
                         "    \"shop\"\r\n" +
@@ -37,7 +35,6 @@ public class ValidateAddPlaceAPI {
                         "").
                 when().post("maps/api/place/add/json")
                 .then().log().all().assertThat().statusCode(200);
-
     }
 
 }

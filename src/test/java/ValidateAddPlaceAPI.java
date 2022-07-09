@@ -43,6 +43,17 @@ public class ValidateAddPlaceAPI {
         //now we extracted place placeId
         System.out.println(placeId);
 
+        //Update Place
+        // place ID need to be change manully on the line 50 due to the add place respose  body
+        given().log().all().queryParam("key","qaclick123").header("Content-Type","Application/json")
+                .body("{\r\n" +
+                        "    \"place_id\":\""+placeId+"\",\r\n" +
+                        "    \"address\":\" London,ON\",\r\n" +
+                        "    \"key\":\"qaclick123\"\r\n" +
+                        "}")
+                .when().put("/maps/api/place/update/json")
+                .then().assertThat().log().all().statusCode(200).body("msg",equalTo("Address successfully updated"));
+
     }
 
 }
